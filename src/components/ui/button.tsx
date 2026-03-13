@@ -12,11 +12,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[var(--signal)] px-6 py-3 text-[var(--ink)] shadow-[0_18px_50px_-22px_rgba(190,246,128,0.85)] hover:-translate-y-0.5 hover:shadow-[0_22px_60px_-24px_rgba(190,246,128,1)]",
+          "bg-[var(--signal)] px-6 py-3 text-[var(--primary-foreground)] shadow-[0_18px_48px_-20px_rgba(214,255,87,0.6)] hover:-translate-y-0.5 hover:shadow-[0_24px_64px_-24px_rgba(214,255,87,0.74)]",
         outline:
-          "border border-[var(--line-strong)] bg-white/70 px-6 py-3 text-[var(--ink)] hover:-translate-y-0.5 hover:bg-white",
+          "border border-[var(--line-strong)] bg-[rgba(10,14,24,0.72)] px-6 py-3 text-[var(--ink)] hover:-translate-y-0.5 hover:border-[rgba(214,255,87,0.34)] hover:bg-[rgba(16,22,34,0.96)]",
         ghost:
-          "px-4 py-3 text-[var(--ink)] hover:bg-white/70",
+          "px-4 py-3 text-[var(--ink)] hover:bg-[rgba(17,24,38,0.82)]",
         link: "px-0 py-0 text-[var(--ink)] underline-offset-4 hover:underline",
       },
       size: {

@@ -50,7 +50,7 @@ export default function InstallPage() {
             {installSteps.map((step, index) => (
               <div
                 key={step}
-                className="rounded-[24px] border border-[var(--line)] bg-white/85 px-4 py-4"
+                className="rounded-[24px] border border-[var(--line)] bg-[rgba(12,18,28,0.78)] px-4 py-4"
               >
                 <p className="mb-2 text-xs font-semibold tracking-[0.18em] text-[var(--muted-copy)] uppercase">
                   Step 0{index + 1}
@@ -72,7 +72,7 @@ export default function InstallPage() {
           ].map((item) => (
             <div
               key={item}
-              className="rounded-[24px] border border-[var(--line)] bg-white/80 p-5 text-sm leading-7 text-[var(--muted-copy)]"
+              className="rounded-[24px] border border-[var(--line)] bg-[rgba(12,18,28,0.78)] p-5 text-sm leading-7 text-[var(--muted-copy)]"
             >
               {item}
             </div>

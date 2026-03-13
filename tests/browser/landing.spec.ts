@@ -14,6 +14,7 @@ test("homepage shows deploy-first hero and external CTA", async ({ page }) => {
   await expect(
     page.getByText(/run a local-first ai research assistant/i),
   ).toBeVisible();
+  await expect(page.getByText(/ai command center already running/i)).toBeVisible();
 });
 
 test("interactive demo updates the summary when options change", async ({
@@ -45,4 +46,20 @@ test("marketing and legal routes are reachable", async ({ page }) => {
     await page.goto(route.url);
     await expect(page.getByRole("heading", { name: route.heading })).toBeVisible();
   }
+});
+
+test("mobile homepage keeps the command-center layout without horizontal overflow", async ({
+  page,
+}) => {
+  test.skip(test.info().project.name !== "mobile", "mobile only");
+
+  await page.goto("/");
+
+  await expect(page.getByText(/ai command center already running/i)).toBeVisible();
+
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - window.innerWidth,
+  );
+
+  expect(overflow).toBeLessThanOrEqual(1);
 });

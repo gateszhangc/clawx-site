@@ -51,7 +51,7 @@ export default function DeployPage() {
 
         <div className="panel-shell p-6 md:p-8">
           <div className="mb-5 flex items-center gap-3 text-sm font-semibold text-[var(--ink)]">
-            <ShieldCheck className="size-4 text-[var(--signal-deep)]" />
+            <ShieldCheck className="size-4 text-[var(--signal)]" />
             What this page promises
           </div>
           <div className="space-y-4 text-sm leading-7 text-[var(--muted-copy)]">
@@ -115,9 +115,9 @@ export default function DeployPage() {
             ].map((item) => (
               <div
                 key={item}
-                className="flex items-start gap-3 rounded-2xl border border-[var(--line)] bg-white/80 px-4 py-4"
+                className="flex items-start gap-3 rounded-2xl border border-[var(--line)] bg-[rgba(12,18,28,0.78)] px-4 py-4"
               >
-                <CheckCircle2 className="mt-0.5 size-4 text-[var(--signal-deep)]" />
+                <CheckCircle2 className="mt-0.5 size-4 text-[var(--signal)]" />
                 <p className="text-sm leading-6 text-[var(--ink)]">{item}</p>
               </div>
             ))}

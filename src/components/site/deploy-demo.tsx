@@ -38,93 +38,107 @@ export function DeployDemo() {
   return (
     <section
       id="demo"
-      className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]"
+      className="grid gap-6 lg:grid-cols-[0.84fr_1.16fr]"
       data-testid="deploy-demo"
     >
       <div className="panel-shell space-y-6 p-6 md:p-8">
-        <div className="space-y-3">
-          <p className="eyebrow">Deployment Preview</p>
-          <h2 className="font-[family:var(--font-display)] text-3xl leading-tight text-[var(--ink)] md:text-4xl">
+        <div className="space-y-4">
+          <div className="inline-flex items-center gap-3">
+            <span className="status-dot" />
+            <p className="eyebrow">Deployment Preview</p>
+          </div>
+          <h2 className="font-[family:var(--font-display)] text-3xl leading-tight tracking-[-0.04em] text-[var(--ink)] md:text-4xl">
             Turn one setup into continuous research.
           </h2>
-          <p className="max-w-xl text-sm leading-7 text-[var(--muted)] md:text-base">
-            This is the flow users remember: choose the signal, define the
-            cadence, route the output, and let ClawX keep running after the tab
-            is closed.
+          <p className="max-w-xl text-sm leading-7 text-[var(--muted-copy)] md:text-base">
+            Pick the signal, lock the cadence, route the output, and preview
+            the exact kind of operating summary ClawX should keep shipping after
+            deployment.
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-3">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-[var(--muted)] uppercase">
-              <Radar className="size-4" />
+        <div className="space-y-4">
+          <div className="terminal-row p-4">
+            <div className="mb-4 flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-[var(--muted-copy)] uppercase">
+              <Radar className="size-4 text-[var(--signal)]" />
               Source
             </div>
-            {demoOptions.sources.map((item) => (
-              <button
-                key={item}
-                type="button"
-                data-testid={`source-option-${item.replaceAll(" ", "-").toLowerCase()}`}
-                onClick={() => activate("source", item)}
-                className={`choice-chip ${source === item ? "choice-chip-active" : ""}`}
-              >
-                {item}
-              </button>
-            ))}
+            <div className="grid gap-3">
+              {demoOptions.sources.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  data-testid={`source-option-${item.replaceAll(" ", "-").toLowerCase()}`}
+                  onClick={() => activate("source", item)}
+                  className={`choice-chip ${source === item ? "choice-chip-active" : ""}`}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-[var(--muted)] uppercase">
-              <Clock3 className="size-4" />
-              Cadence
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="terminal-row p-4">
+              <div className="mb-4 flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-[var(--muted-copy)] uppercase">
+                <Clock3 className="size-4 text-[var(--blue-glow)]" />
+                Cadence
+              </div>
+              <div className="grid gap-3">
+                {demoOptions.cadences.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    data-testid={`cadence-option-${item.replaceAll(/[^a-zA-Z0-9]+/g, "-").toLowerCase()}`}
+                    onClick={() => activate("cadence", item)}
+                    className={`choice-chip ${cadence === item ? "choice-chip-active" : ""}`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
             </div>
-            {demoOptions.cadences.map((item) => (
-              <button
-                key={item}
-                type="button"
-                data-testid={`cadence-option-${item.replaceAll(/[^a-zA-Z0-9]+/g, "-").toLowerCase()}`}
-                onClick={() => activate("cadence", item)}
-                className={`choice-chip ${cadence === item ? "choice-chip-active" : ""}`}
-              >
-                {item}
-              </button>
-            ))}
-          </div>
 
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-[var(--muted)] uppercase">
-              <BellDot className="size-4" />
-              Channel
+            <div className="terminal-row p-4">
+              <div className="mb-4 flex items-center gap-2 text-xs font-semibold tracking-[0.18em] text-[var(--muted-copy)] uppercase">
+                <BellDot className="size-4 text-[var(--signal)]" />
+                Channel
+              </div>
+              <div className="grid gap-3">
+                {demoOptions.channels.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    data-testid={`channel-option-${item.toLowerCase()}`}
+                    onClick={() => activate("channel", item)}
+                    className={`choice-chip ${channel === item ? "choice-chip-active" : ""}`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
             </div>
-            {demoOptions.channels.map((item) => (
-              <button
-                key={item}
-                type="button"
-                data-testid={`channel-option-${item.toLowerCase()}`}
-                onClick={() => activate("channel", item)}
-                className={`choice-chip ${channel === item ? "choice-chip-active" : ""}`}
-              >
-                {item}
-              </button>
-            ))}
           </div>
         </div>
       </div>
 
       <div className="panel-shell relative overflow-hidden p-6 md:p-8">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(190,246,128,0.24),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(29,78,216,0.15),transparent_30%)]" />
+        <div className="absolute -right-16 top-0 h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(214,255,87,0.18),transparent_68%)] blur-2xl" />
+        <div className="absolute -left-12 bottom-0 h-52 w-52 rounded-full bg-[radial-gradient(circle,rgba(111,146,255,0.18),transparent_70%)] blur-2xl" />
+
         <div className="relative space-y-5">
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="eyebrow">Live Panel</p>
               <h3
-                className="font-[family:var(--font-display)] text-2xl text-[var(--ink)]"
+                className="mt-2 font-[family:var(--font-display)] text-3xl tracking-[-0.04em] text-[var(--ink)]"
                 data-testid="demo-summary-heading"
               >
                 {source}
               </h3>
             </div>
-            <div className="rounded-full border border-[var(--line-strong)] bg-white/90 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-[var(--muted)] uppercase">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(214,255,87,0.24)] bg-[rgba(214,255,87,0.1)] px-3 py-1 text-xs font-semibold tracking-[0.18em] text-[var(--signal)] uppercase">
+              <span className="status-dot" />
               {isPending ? "Refreshing" : "Running"}
             </div>
           </div>
@@ -144,17 +158,62 @@ export function DeployDemo() {
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-[var(--line-strong)] bg-[var(--panel)] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]">
-            <div className="mb-4 flex items-center gap-3 text-sm font-semibold text-[var(--ink)]">
-              <Bot className="size-4 text-[var(--signal-deep)]" />
+          <div className="terminal-row p-5">
+            <div className="mb-4 flex items-center gap-3 text-sm font-semibold tracking-[0.08em] text-[var(--ink)] uppercase">
+              <Bot className="size-4 text-[var(--signal)]" />
               Summary preview
             </div>
             <p
-              className="text-sm leading-7 text-[var(--muted)] md:text-base"
+              className="text-sm leading-7 text-[var(--muted-copy)] md:text-base"
               data-testid="demo-summary-body"
             >
               {summary}
             </p>
+          </div>
+
+          <div className="grid gap-4 xl:grid-cols-[0.92fr_1.08fr]">
+            <div className="terminal-row p-5">
+              <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-[var(--muted-copy)] uppercase">
+                Runbook
+              </p>
+              <div className="space-y-3">
+                {[
+                  `Watch ${source.toLowerCase()} sources`,
+                  `Execute on ${cadence.toLowerCase()}`,
+                  `Dispatch into ${channel}`,
+                ].map((item, index) => (
+                  <div
+                    key={item}
+                    className="rounded-[1.2rem] border border-[var(--line)] bg-[rgba(12,18,28,0.78)] px-4 py-3 text-sm text-[var(--ink)]"
+                  >
+                    <span className="mr-3 font-[family:var(--font-code)] text-[var(--muted-copy)]">
+                      0{index + 1}
+                    </span>
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="terminal-row p-5">
+              <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-[var(--muted-copy)] uppercase">
+                Output preview
+              </p>
+              <div className="space-y-3">
+                {[
+                  "New sources ranked by urgency",
+                  "Digest includes linked evidence",
+                  "Delivery stays outside the chat tab",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-[1.2rem] border border-[rgba(214,255,87,0.18)] bg-[rgba(214,255,87,0.08)] px-4 py-3 text-sm font-semibold text-[var(--ink)]"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -162,7 +221,7 @@ export function DeployDemo() {
               <Sparkles />
               Trigger next run
             </Button>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-white/70 px-4 py-2 text-xs font-semibold tracking-[0.16em] text-[var(--muted)] uppercase">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[rgba(12,18,28,0.78)] px-4 py-2 text-xs font-semibold tracking-[0.16em] text-[var(--muted-copy)] uppercase">
               Digest routed to {channel}
               <ArrowRight className="size-3.5" />
             </div>
