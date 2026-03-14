@@ -5,3 +5,4 @@ test-results
 playwright-report
 npm-debug.log*
 .env*
+!.env.production
