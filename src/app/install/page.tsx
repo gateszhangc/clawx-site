@@ -3,16 +3,15 @@ import Link from "next/link";
 import { ArrowRight, Download, Github } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { createPageMetadata } from "@/lib/metadata";
 import { installSteps, siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
-  title: "Install Locally",
+export const metadata: Metadata = createPageMetadata({
+  title: "Install ClawX Locally",
   description:
-    "Install ClawX locally with the desktop release flow, then connect your model provider and recurring tasks.",
-  alternates: {
-    canonical: "/install",
-  },
-};
+    "Install ClawX locally from the desktop release flow and run a local-first AI research assistant on your own machine.",
+  path: "/install",
+});
 
 export default function InstallPage() {
   return (

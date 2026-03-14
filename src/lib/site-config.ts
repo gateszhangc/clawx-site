@@ -1,11 +1,34 @@
+const fallbackUrl = "https://clawx.lol";
+
+function normalizeSiteUrl(value?: string) {
+  if (!value) {
+    return fallbackUrl;
+  }
+
+  try {
+    return new URL(value).toString().replace(/\/$/, "");
+  } catch {
+    return fallbackUrl;
+  }
+}
+
+const siteUrl = normalizeSiteUrl(process.env.NEXT_PUBLIC_WEB_URL);
+const siteName = process.env.NEXT_PUBLIC_PROJECT_NAME || "ClawX";
+
 export const siteConfig = {
-  name: "ClawX",
-  url: "https://clawx.lol",
+  name: siteName,
+  url: siteUrl,
+  domain: new URL(siteUrl).host,
   deployUrl: "https://www.easyclaw.pro",
   githubUrl: "https://github.com/ValueCell-ai/ClawX",
   releasesUrl: "https://github.com/ValueCell-ai/ClawX/releases",
+  supportEmail: "support@clawx.lol",
+  defaultTitle: "ClawX: Local-First AI Research Assistant",
   description:
-    "Deploy ClawX in 1 minute. Run a local-first AI research assistant that keeps monitoring, collecting, and delivering updates for you, 24/7.",
+    "ClawX is a local-first AI research assistant you can deploy in 1 minute to monitor sources, collect updates, and deliver recurring briefs 24/7.",
+  ogImageAlt:
+    "ClawX homepage preview for the local-first AI research assistant website",
+  publishedAt: "2026-03-14T00:00:00.000Z",
   nav: [
     { label: "Features", href: "/#features" },
     { label: "Deploy", href: "/deploy" },
@@ -14,10 +37,13 @@ export const siteConfig = {
   ],
   keywords: [
     "ClawX",
+    "clawx",
+    "what is ClawX",
     "deploy ClawX",
     "self-hosted AI assistant",
     "AI research assistant",
     "local-first AI",
+    "local-first AI research assistant",
     "autonomous monitoring",
     "OpenClaw",
     "desktop AI assistant",
@@ -155,7 +181,7 @@ export const installSteps = [
   "Create your first recurring task and choose where updates should land.",
 ];
 
-export const legalContact = "support@clawx.lol";
+export const legalContact = siteConfig.supportEmail;
 
 export const demoOptions = {
   sources: ["Market radar", "Research brief", "Launch tracker"],

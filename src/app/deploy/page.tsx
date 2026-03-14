@@ -3,16 +3,15 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, ExternalLink, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { createPageMetadata } from "@/lib/metadata";
 import { deploySteps, siteConfig } from "@/lib/site-config";
 
-export const metadata: Metadata = {
-  title: "Deploy",
+export const metadata: Metadata = createPageMetadata({
+  title: "Deploy ClawX",
   description:
-    "Go from zero to a running ClawX workspace in 1 minute and point the runtime at your own recurring research workflows.",
-  alternates: {
-    canonical: "/deploy",
-  },
-};
+    "Deploy ClawX in 1 minute and launch a local-first AI research assistant for recurring monitoring and research workflows.",
+  path: "/deploy",
+});
 
 export default function DeployPage() {
   return (

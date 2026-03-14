@@ -15,6 +15,16 @@ test("homepage shows deploy-first hero and external CTA", async ({ page }) => {
     page.getByText(/run a local-first ai research assistant/i),
   ).toBeVisible();
   await expect(page.getByText(/ai command center already running/i)).toBeVisible();
+
+  await expect(page).toHaveTitle(/clawx/i);
+  await expect(page.locator("head meta[name='description']")).toHaveAttribute(
+    "content",
+    /clawx/i,
+  );
+  await expect(page.locator("head link[rel='canonical']")).toHaveAttribute(
+    "href",
+    /^https?:\/\/[^/]+\/?$/,
+  );
 });
 
 test("interactive demo updates the summary when options change", async ({
@@ -46,6 +56,17 @@ test("marketing and legal routes are reachable", async ({ page }) => {
     await page.goto(route.url);
     await expect(page.getByRole("heading", { name: route.heading })).toBeVisible();
   }
+});
+
+test("robots and sitemap expose production SEO endpoints", async ({ page }) => {
+  const robots = await page.request.get("/robots.txt");
+  expect(robots.ok()).toBeTruthy();
+  expect.soft(await robots.text()).toContain("/sitemap.xml");
+
+  const sitemap = await page.request.get("/sitemap.xml");
+  expect(sitemap.ok()).toBeTruthy();
+  expect.soft(await sitemap.text()).toContain("/privacy-policy");
+  expect.soft(await sitemap.text()).toContain("/terms-of-service");
 });
 
 test("mobile homepage keeps the command-center layout without horizontal overflow", async ({

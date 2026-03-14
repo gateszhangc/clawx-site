@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 
+import { createPageMetadata } from "@/lib/metadata";
 import { legalContact } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Privacy Policy",
-  alternates: {
-    canonical: "/privacy-policy",
-  },
-};
+  description:
+    "Read the ClawX privacy policy for the clawx.lol website, analytics handling, support contact details, and local-first product context.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (

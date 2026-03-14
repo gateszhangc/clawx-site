@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 
+import { createPageMetadata } from "@/lib/metadata";
 import { legalContact } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Terms of Service",
-  alternates: {
-    canonical: "/terms-of-service",
-  },
-};
+  description:
+    "Review the ClawX terms of service for using the clawx.lol website, deployment links, release artifacts, and related launch content.",
+  path: "/terms-of-service",
+});
 
 export default function TermsOfServicePage() {
   return (

@@ -5,6 +5,7 @@ import {
   IBM_Plex_Sans,
 } from "next/font/google";
 
+import { SiteAnalytics } from "@/components/site/site-analytics";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
 import { siteConfig } from "@/lib/site-config";
@@ -29,36 +30,47 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
   title: {
-    default: "ClawX | Deploy in 1 minute",
+    default: siteConfig.defaultTitle,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
+  category: "technology",
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  robots: {
+    index: true,
+    follow: true,
+  },
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "ClawX | Deploy in 1 minute",
+    title: siteConfig.defaultTitle,
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
+    locale: "en_US",
     type: "website",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "ClawX deployment preview",
+        alt: siteConfig.ogImageAlt,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ClawX | Deploy in 1 minute",
+    title: siteConfig.defaultTitle,
     description: siteConfig.description,
     images: ["/twitter-image"],
   },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
@@ -66,12 +78,49 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaMeasurementId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+  const clarityProjectId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+  };
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/icon.svg`,
+    sameAs: [siteConfig.githubUrl],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "support",
+        email: siteConfig.supportEmail,
+      },
+    ],
+  };
+
   return (
     <html
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
       <body className="antialiased">
+        <SiteAnalytics
+          clarityProjectId={clarityProjectId}
+          gaMeasurementId={gaMeasurementId}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <div className="page-shell">
           <div className="page-orb page-orb-left" />
           <div className="page-orb page-orb-right" />
