@@ -1,4 +1,4 @@
-const fallbackUrl = "https://clawx.lol";
+const fallbackUrl = "https://www.clawx.lol";
 
 function normalizeSiteUrl(value?: string) {
   if (!value) {
